@@ -1,0 +1,7 @@
+{
+  "schema_version": "alert_scope_v1",
+  "purpose": "Behavioral security-investigation V1. This filters only this project's intake; it does not change Wazuh rules or alerts.",
+  "excluded_rule_groups": ["vulnerability-detector", "sca"],
+  "excluded_title_patterns": ["\\bCVE-\\d{4}-\\d+\\b", "\\bCIS Benchmark\\b", "\\bSCA summary\\b"],
+  "excluded_rule_ids": []
+}

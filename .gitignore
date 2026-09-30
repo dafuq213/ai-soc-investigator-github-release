@@ -1,0 +1,25 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+.wazuh*.env
+.vscode/
+.idea/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime evidence, reports, prompts, model responses, and usage ledgers may
+# contain sensitive operational data. Never publish them.
+data/
+
+# Local benchmark corpora and analyst reviews are evidence, not source code.
+benchmarks/
+
+# Local release archives and build output.
+dist/
+build/
+*.zip
+*.tar.gz
