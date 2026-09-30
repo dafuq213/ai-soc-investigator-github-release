@@ -62,6 +62,64 @@ WAZUH_VERIFY_TLS=true
 Configure only the model provider you intend to use in `.env`. Start with
 evidence-only mode to verify Wazuh connectivity without making a model call.
 
++## Configure the LLM
+
+Model configuration belongs in the local `.env` file, which is excluded from
+Git. Never place a real API key in `.env.example`.
+
+### Local Ollama
+
+Ollama does not require an API key:
+
+```env
+LLM_PROVIDER=ollama
+LLM_MODEL=llama3.2
+OLLAMA_BASE_URL=http://localhost:11434
+LLM_TIMEOUT_SECONDS=180
+OLLAMA_NUM_CTX=4096
+OLLAMA_MAX_TOKENS=1000
+```
+
+Install or select another local model by changing `LLM_MODEL`.
+
+### Claude API
+
+Create an API key in the Anthropic Console and put it only in `.env`:
+
+```env
+LLM_PROVIDER=anthropic
+LLM_MODEL=claude-sonnet-4-6
+ANTHROPIC_API_KEY=replace-with-your-private-key
+
+LLM_MAX_OUTPUT_TOKENS=1000
+LLM_TIMEOUT_SECONDS=180
+
+LLM_INPUT_USD_PER_MTOK=replace-with-current-rate
+LLM_OUTPUT_USD_PER_MTOK=replace-with-current-rate
+LLM_MAX_REQUEST_USD=0.10
+LLM_PROJECT_BUDGET_USD=4.00
+LLM_USAGE_LEDGER=data/usage/llm_usage.jsonl
+```
+
+The application refuses an Anthropic request when pricing is missing, the
+estimated request exceeds `LLM_MAX_REQUEST_USD`, or accumulated estimated
+spend would exceed `LLM_PROJECT_BUDGET_USD`. Confirm current rates with
+Anthropic before enabling paid calls.
+
+`LLM_MAX_OUTPUT_TOKENS` limits generated output; it is not an API credential.
+The API credential is `ANTHROPIC_API_KEY`.
+
+### Verify without spending tokens
+
+Always validate evidence collection first:
+
+```powershell
+.\.venv\Scripts\python.exe -m src.investigate_generic --alert-id '<ALERT_ID>' --evidence-only
+```
+
+Remove or revoke a key immediately if it is accidentally committed or exposed.
+
+
 ## Run
 
 Evidence collection only:
