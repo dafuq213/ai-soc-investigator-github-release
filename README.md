@@ -41,7 +41,7 @@ runtime dependency.
 ## Setup
 
 ```powershell
-git clone <YOUR_PRIVATE_REPOSITORY_URL>
+git clone https://github.com/dafuq213/ai-soc-investigator-github-release.git
 Set-Location ai-soc-investigator
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -62,7 +62,7 @@ WAZUH_VERIFY_TLS=true
 Configure only the model provider you intend to use in `.env`. Start with
 evidence-only mode to verify Wazuh connectivity without making a model call.
 
-+## Configure the LLM
+## Configure the LLM
 
 Model configuration belongs in the local `.env` file, which is excluded from
 Git. Never place a real API key in `.env.example`.
