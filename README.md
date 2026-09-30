@@ -42,7 +42,7 @@ runtime dependency.
 
 ```powershell
 git clone https://github.com/dafuq213/ai-soc-investigator-github-release.git
-Set-Location ai-soc-investigator
+Set-Location ai-soc-investigator-github-release
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 Copy-Item .env.example .env
